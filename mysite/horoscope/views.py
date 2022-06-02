@@ -22,9 +22,14 @@ zodiac_dic = {
 
 
 def index(request):
-    zodiacs=', '.join(list(zodiac_dic))
-    return HttpResponse(zodiacs)
+    # zodiacs=', '.join(list(zodiac_dic)
 
+    li_el = ''
+    for zodi in zodiac_dic:
+        redirect_path = reverse('horoscope-name', args=[zodi])
+        li_el += f"<li> <a href={redirect_path}> {zodi.title()} </a></li>    "
+    response = f"<ul> {li_el} </ul>"
+    return HttpResponse(response)
 
 
 def get_zodiac(request, zodiac: str):
